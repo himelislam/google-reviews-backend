@@ -17,24 +17,51 @@ const fetchReviewsFromGoogle = async (placeId) => {
                 params: {
                     place_id: placeId,
                     key: process.env.GOOGLE_API_KEY,
-                    fields: "reviews",
+                    fields: "reviews,user_ratings_total,rating",
+                    reviews_sort: "newest",
                 },
             }
         );
 
         const result = response.data.result;
-        if (!result || !result.reviews) {
-            throw new Error("No reviews found or invalid placeId");
+
+        // Handle missing result or reviews
+        if (!result) {
+            throw new Error("Invalid placeId or no data returned for the place.");
+        }
+
+        if (!result.reviews) {
+            throw new Error("No reviews available for the given place.");
         }
 
         // Update the cache
         cache.reviews = result.reviews;
+        cache.totalReviews = result.user_ratings_total;
+        cache.averageRating = result.rating;
+        cache.leaveAReviewURL = `https://search.google.com/local/writereview?placeid=${placeId}`;
         cache.lastFetched = new Date();
 
-        return cache.reviews;
+        return {
+            reviews: cache.reviews,
+            totalReviews: result.user_ratings_total || 0, // Default to 0 if not available
+            averageRating: result.rating || 0, // Default to 0 if not available
+            leaveAReviewURL: `https://search.google.com/local/writereview?placeid=${placeId}`
+        };
     } catch (error) {
-        console.error("Error fetching reviews:", error.message);
-        throw error;
+        if (error.response) {
+            // Errors from the API
+            const { status, data } = error.response;
+            console.error(`API Error: ${status} - ${data.error_message || data}`);
+            throw new Error(`Google API error: ${data.error_message || "Unknown error"}`);
+        } else if (error.request) {
+            // No response from the API
+            console.error("No response from Google API:", error.request);
+            throw new Error("Failed to connect to Google API. Please try again later.");
+        } else {
+            // Other errors (e.g., code bugs)
+            console.error("Unexpected error:", error.message);
+            throw new Error("An unexpected error occurred.");
+        }
     }
 };
 
@@ -54,7 +81,7 @@ app.get("/reviews", async (req, res) => {
 
     if (isCacheValid) {
         console.log("Serving reviews from cache");
-        return res.json(cache.reviews);
+        return res.json(cache);
     }
 
     try {
