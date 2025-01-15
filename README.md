@@ -74,7 +74,7 @@ curl "http://localhost:3000/reviews?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4"
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLtFdF9D3XZ22qRhiXLz4lVGMvhy6jk3Rpw7JmaHEkIYZK1ig=s128-c0x00000000-cc-rp-mo",
         "rating": 5,
         "relative_time_description": "2 months ago",
-        "text": "Very impressed! Simply couldn't have been more accommodating. Very upfront with the estimated charges and how it works. Great communication - they will NOT do any work above the estimate without your prior express consent. Oh yeah - they actually fixed the problem!! Highly recommend.",
+        "text": "Very impressed! Simply couldn't have been more accommodating.",
         "time": 1730921980,
         "translated": false
     }
@@ -111,7 +111,7 @@ curl "http://localhost:3000/refresh-reviews?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4"
         "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLtFdF9D3XZ22qRhiXLz4lVGMvhy6jk3Rpw7JmaHEkIYZK1ig=s128-c0x00000000-cc-rp-mo",
         "rating": 5,
         "relative_time_description": "2 months ago",
-        "text": "Very impressed! Simply couldn't have been more accommodating. Very upfront with the estimated charges and how it works. Great communication - they will NOT do any work above the estimate without your prior express consent. Oh yeah - they actually fixed the problem!! Highly recommend.",
+        "text": "Very impressed! Simply couldn't have been more accommodating.",
         "time": 1730921980,
         "translated": false
         }
