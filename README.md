@@ -64,14 +64,26 @@ curl "http://localhost:3000/reviews?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4"
 
 **Response:**
 ```json
-[
+{
+   "reviews":[ 
     {
-        "author_name": "John Doe",
+        "author_name": "Tim Kemmy",
+        "author_url": "https://www.google.com/maps/contrib/115632640353484101711/reviews",
+        "language": "en",
+        "original_language": "en",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLtFdF9D3XZ22qRhiXLz4lVGMvhy6jk3Rpw7JmaHEkIYZK1ig=s128-c0x00000000-cc-rp-mo",
         "rating": 5,
-        "text": "Great place!",
-        "time": "2 days ago"
+        "relative_time_description": "2 months ago",
+        "text": "Very impressed! Simply couldn't have been more accommodating. Very upfront with the estimated charges and how it works. Great communication - they will NOT do any work above the estimate without your prior express consent. Oh yeah - they actually fixed the problem!! Highly recommend.",
+        "time": 1730921980,
+        "translated": false
     }
-]
+    ],
+    "totalReviews": 88,
+    "averageRating": 5,
+    "leaveAReviewURL": "https://search.google.com/local/writereview?placeid=ChIJRQuKLcaj54gRgLJyrT5Xzo8",
+    "lastFetched": "2025-01-15T21:39:56.481Z",
+}
 ```
 
 ### 2. `GET /refresh-reviews`
@@ -92,11 +104,21 @@ curl "http://localhost:3000/refresh-reviews?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4"
     "message": "Cache updated successfully",
     "reviews": [
         {
-            "author_name": "Jane Smith",
-            "rating": 4,
-            "text": "Nice ambiance.",
-            "time": "1 day ago"
+            "author_name": "Tim Kemmy",
+        "author_url": "https://www.google.com/maps/contrib/115632640353484101711/reviews",
+        "language": "en",
+        "original_language": "en",
+        "profile_photo_url": "https://lh3.googleusercontent.com/a/ACg8ocLtFdF9D3XZ22qRhiXLz4lVGMvhy6jk3Rpw7JmaHEkIYZK1ig=s128-c0x00000000-cc-rp-mo",
+        "rating": 5,
+        "relative_time_description": "2 months ago",
+        "text": "Very impressed! Simply couldn't have been more accommodating. Very upfront with the estimated charges and how it works. Great communication - they will NOT do any work above the estimate without your prior express consent. Oh yeah - they actually fixed the problem!! Highly recommend.",
+        "time": 1730921980,
+        "translated": false
         }
+         "totalReviews": 88,
+    "averageRating": 5,
+    "leaveAReviewURL": "https://search.google.com/local/writereview?placeid=ChIJRQuKLcaj54gRgLJyrT5Xzo8",
+    "lastFetched": "2025-01-15T21:39:56.481Z",
     ]
 }
 ```
@@ -147,7 +169,3 @@ project-folder/
 - Implement rate-limiting to prevent abuse.
 
 ---
-
-## License
-
-This project is open-source and available under the MIT License.
